@@ -1,0 +1,21 @@
+[
+  {"question": "What is artificial intelligence?", "page": 1},
+  {"question": "What is KMeans?", "page": 2},
+  {"question": "What does TF-IDF measure?", "page": 2},
+  {"question": "What are the three main types of machine learning?", "page": 2},
+  {"question": "What is a large language model?", "page": 3},
+  {"question": "Why do LLMs hallucinate?", "page": 3},
+  {"question": "Which tool runs small models on a laptop?", "page": 3},
+  {"question": "What is an embedding?", "page": 4},
+  {"question": "What is Chroma?", "page": 4},
+  {"question": "What chunk size is a common starting point?", "page": 4},
+  {"question": "What are the two phases of RAG?", "page": 5},
+  {"question": "What is supervised learning?", "page": 2},
+  {"question": "What does cosine similarity do?", "page": 4},
+  {"question": "What is generative AI?", "page": 3},
+  {"question": "Who won the 2011 cricket World Cup?", "page": null},
+  {"question": "What is the capital of France?", "page": null},
+  {"question": "How do I bake a chocolate cake?", "page": null},
+  {"question": "What is Docker?", "page": null},
+  {"question": "Who created the Python language?", "page": null}
+]

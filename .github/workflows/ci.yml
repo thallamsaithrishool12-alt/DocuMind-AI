@@ -1,0 +1,27 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      # The tests use a fake embedder, so the heavy sentence-transformers
+      # package is not needed here and CI stays fast.
+      - name: Install dependencies
+        run: |
+          pip install streamlit pypdf chromadb scikit-learn numpy ollama
+          pip install -r requirements-dev.txt
+
+      - name: Run tests
+        run: python -m pytest -v
