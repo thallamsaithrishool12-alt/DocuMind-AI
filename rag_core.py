@@ -150,20 +150,65 @@ def _build_messages(question, chunks):
     ]
 
 
-def ask_llm(question, chunks):
-    import ollama
+# ---------- Groq cloud LLM configuration ----------
 
-    response = ollama.chat(model=LLM, messages=_build_messages(question, chunks))
-    return response["message"]["content"]
+GROQ_MODEL = "openai/gpt-oss-20b"
+
+
+def _get_groq_client():
+    """Create a Groq client using an environment variable or Streamlit Secrets."""
+    import os
+    from groq import Groq
+
+    api_key = os.environ.get("GROQ_API_KEY")
+
+    if not api_key:
+        try:
+            import streamlit as st
+            api_key = st.secrets["GROQ_API_KEY"]
+        except Exception as exc:
+            raise RuntimeError(
+                "GROQ_API_KEY is missing. Add it to .streamlit/secrets.toml "
+                "for local use or to Streamlit Cloud Secrets after deployment."
+            ) from exc
+
+    if not api_key:
+        raise RuntimeError(
+            "GROQ_API_KEY is empty. Please configure your Groq API key.")
+
+    return Groq(api_key=api_key)
+
+
+def ask_llm(question, chunks):
+    """Generate a PDF-grounded answer with the Groq cloud API."""
+    client = _get_groq_client()
+
+    response = client.chat.completions.create(
+        model=GROQ_MODEL,
+        messages=_build_messages(question, chunks),
+        temperature=0.2,
+        max_completion_tokens=1024,
+    )
+
+    return response.choices[0].message.content or ""
 
 
 def ask_llm_stream(question, chunks):
-    """Same as ask_llm, but yields the answer piece by piece as the model writes it."""
-    import ollama
+    """Yield a PDF-grounded Groq answer piece by piece for Streamlit streaming."""
+    client = _get_groq_client()
 
-    stream = ollama.chat(model=LLM, messages=_build_messages(question, chunks), stream=True)
+    stream = client.chat.completions.create(
+        model=GROQ_MODEL,
+        messages=_build_messages(question, chunks),
+        temperature=0.2,
+        max_completion_tokens=1024,
+        stream=True,
+    )
+
     for part in stream:
-        piece = part["message"]["content"]
+        if not part.choices:
+            continue
+        piece = part.choices[0].delta.content
         if piece:
             yield piece
 
@@ -182,7 +227,8 @@ def find_topics(collection, k=NUM_TOPICS):
 
     embeddings = np.array(data["embeddings"])
     k = min(k, len(texts))
-    labels = KMeans(n_clusters=k, n_init=10, random_state=0).fit_predict(embeddings)
+    labels = KMeans(n_clusters=k, n_init=10,
+                    random_state=0).fit_predict(embeddings)
 
     tfidf = TfidfVectorizer(stop_words="english")
     try:

@@ -16,3 +16,4 @@ chroma_db/
 Thumbs.db
 .vscode/
 .idea/
+.streamlit/secrets.toml

@@ -335,7 +335,7 @@ with st.sidebar:
             "2. Each chunk becomes numbers (an embedding)\n"
             "3. Your question is matched to the closest chunks\n"
             "4. If nothing is close enough, you get 'not found'\n"
-            "5. Otherwise a local LLM answers from those chunks only"
+            "5. Otherwise a cloud LLM answers from those chunks only"
         )
 
 
@@ -354,7 +354,7 @@ st.markdown(HERO_HTML.format(subtitle=subtitle), unsafe_allow_html=True)
 if st.session_state.collection is None:
     st.markdown(FEATURES_HTML, unsafe_allow_html=True)
     st.caption(
-        "Runs locally with Ollama. Your documents never leave your computer.")
+        "Powered by Groq cloud AI. Answers are generated using retrieved PDF context.")
 
 
 # ---------- Chat ----------
@@ -428,8 +428,8 @@ if st.session_state.collection is not None:
 
             except Exception as e:
                 answer = (
-                    "Something went wrong. Please check whether Ollama is running "
-                    "and the required model is installed."
+                    "Something went wrong while generating the answer. "
+                    "Please check your Groq API key, model access, and internet connection."
                 )
                 placeholder.markdown(answer)
                 st.caption(str(e))
@@ -441,3 +441,4 @@ if st.session_state.collection is not None:
 
         # Rerun once more to re-enable the chat input after the answer is saved.
         st.rerun()
+
