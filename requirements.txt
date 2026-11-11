@@ -1,7 +1,8 @@
+
 streamlit
 pypdf
 sentence-transformers
 chromadb
 scikit-learn
 numpy
-ollama
+groq
