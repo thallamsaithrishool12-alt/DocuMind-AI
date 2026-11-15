@@ -1,0 +1,14 @@
+# secrets and private data
+.env
+.streamlit/secrets.toml
+data/*
+!data/.gitkeep
+chroma_db/
+*.sqlite3
+
+# python
+__pycache__/
+*.pyc
+.pytest_cache/
+venv/
+.venv/

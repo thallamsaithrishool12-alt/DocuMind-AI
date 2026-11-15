@@ -1,0 +1,55 @@
+/* DocuMind AI: small touches on top of the Streamlit dark theme */
+.block-container { max-width: 880px; padding-top: 2.2rem; padding-bottom: 6rem; }
+header[data-testid="stHeader"] { background: transparent; }
+
+.dm-brand { display:flex; align-items:center; gap:.6rem; margin-bottom:.2rem; }
+.dm-logo { width:34px; height:34px; border-radius:10px; display:grid; place-items:center; font-size:1.1rem;
+  background: linear-gradient(135deg,#8b7bff,#18b4d8); }
+.dm-title { font-size:1.35rem; font-weight:700; letter-spacing:-.01em; }
+.dm-tagline { color:#9aa0b4; font-size:.9rem; margin:0 0 1rem 0; }
+
+.dm-info { background:#1b1f2c; border:1px solid #2a2f40; border-radius:10px; padding:.55rem .75rem;
+  font-size:.85rem; color:#c9cde0; margin:.3rem 0 .6rem 0; }
+.dm-info b { color:#fff; }
+
+.dm-card { display:flex; align-items:center; gap:.6rem; background:#1b1f2c; border:1px solid #2a2f40;
+  border-radius:12px; padding:.5rem .7rem; min-height:46px; }
+.dm-card .ico { font-size:1.15rem; }
+.dm-card .name { font-size:.88rem; font-weight:600; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:170px; }
+.dm-card .meta { font-size:.72rem; color:#9aa0b4; }
+.dm-card .txt { min-width:0; }
+
+[data-testid="stSidebar"] .stButton > button { padding:.15rem .5rem; min-height:2rem; }
+[data-testid="stSidebar"] [data-testid="stHorizontalBlock"] { margin-bottom:.4rem; }
+[data-testid="stSidebar"] [class*="st-key-remove_"] button { width:2rem; min-width:2rem; padding:0; border-radius:8px; }
+
+.dm-empty { text-align:center; color:#9aa0b4; padding:3.5rem 1rem 1rem 1rem; }
+.dm-empty h3 { color:#e8eaf0; margin-bottom:.4rem; }
+.dm-chip { display:inline-block; border:1px solid #2a2f40; border-radius:999px; padding:.25rem .75rem;
+  margin:.2rem; font-size:.82rem; color:#c9cde0; }
+
+.dm-src-title { font-weight:600; font-size:.9rem; }
+.dm-src-loc { font-size:.78rem; color:#9aa0b4; }
+.dm-snippet { font-size:.85rem; color:#c9cde0; border-left:3px solid #3a4160; padding-left:.6rem; margin:.25rem 0 .7rem 0; }
+
+@media (prefers-reduced-motion: no-preference) {
+  [data-testid="stChatMessage"] { animation: dmFade .35s ease both; }
+  @keyframes dmFade { from { opacity:0; transform: translateY(6px);} to { opacity:1; transform:none; } }
+}
+@media (max-width: 640px) {
+  .block-container { padding: 1.2rem .8rem 6rem .8rem; }
+  .dm-card .name { max-width: 120px; }
+}
+
+/* YouTube link form: orange Submit button with black text, no "Press Enter" hint */
+[data-testid="stSidebar"] [data-testid="stForm"] { padding: 0; }
+[data-testid="stSidebar"] [data-testid="stForm"] [data-testid="InputInstructions"] { display: none; }
+[data-testid="stSidebar"] [data-testid="stForm"] button {
+  background: #ff9f1c !important; border: 1px solid #ff9f1c !important; border-radius: 8px;
+  min-height: 2.5rem; }
+[data-testid="stSidebar"] [data-testid="stForm"] button:hover { background: #ffb347 !important; border-color: #ffb347 !important; }
+[data-testid="stSidebar"] [data-testid="stForm"] button p,
+[data-testid="stSidebar"] [data-testid="stForm"] button { color: #000 !important; font-weight: 700; }
+
+.dm-badge { display:inline-block; font-size:.78rem; padding:.15rem .6rem; border-radius:999px; margin-bottom:.4rem;
+  background:#2a2540; border:1px solid #4a4180; color:#cfc8ff; }
